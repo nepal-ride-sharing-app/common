@@ -6,6 +6,14 @@ const router = Router();
 
 /**
  * @swagger
+ * tags:
+ *   - name: MongoDB
+ *     description: MongoDB operations
+ */
+
+
+/**
+ * @swagger
  * /mongo/create:
  *   post:
  *     summary: Create a new document

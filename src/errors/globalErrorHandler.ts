@@ -22,7 +22,6 @@ export const globalErrorHandler = (
   next: NextFunction,
 ) => {
   log.error(err.message);
-  console.log('code here subash', err);
 
   let errorResponse: ErrorResponse;
 

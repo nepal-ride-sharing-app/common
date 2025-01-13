@@ -1,6 +1,6 @@
-import swaggerJSDoc from 'swagger-jsdoc';
 import fs from 'fs';
 import path from 'path';
+import swaggerJSDoc from 'swagger-jsdoc';
 
 const getRouteFiles = (dir: string) => {
   return fs
@@ -18,6 +18,40 @@ const projectRouteFiles = getRouteFiles(projectRoutesDir).map(
   (file) => `./src/routes/${file}`,
 );
 
+let schemas = {
+  ErrorResponse: {
+    type: 'object',
+    properties: {
+      status: {
+        type: 'number',
+      },
+      message: {
+        type: 'string',
+      },
+      code: {
+        type: 'string',
+      },
+      name: {
+        type: 'string',
+      },
+    },
+  },
+};
+
+try {
+  const importedSchemas = require(
+    path.join(process.cwd(), 'src/configs/swaggerSchemas'),
+  ).default;
+  if (typeof importedSchemas === 'object' && importedSchemas !== null) {
+    schemas = { ...schemas, ...importedSchemas };
+  }
+} catch (error) {
+  console.warn(
+    '[Warn] : Using default schemas as swaggerSchemas.ts is not present or invalid:',
+    error,
+  );
+}
+
 const options = {
   definition: {
     openapi: '3.0.0',
@@ -26,6 +60,15 @@ const options = {
       version: '1.0.0',
       description: 'API documentation for the Driver Service',
     },
+    components: {
+      schemas,
+    },
+    tags: [
+      {
+        name: 'Test',
+        description: 'Test Routes',
+      },
+    ],
     servers: [
       {
         url: process.env.APP_URL || 'http://localhost:3000', // Use APP_URL from environment variables or fallback to localhost

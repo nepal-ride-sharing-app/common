@@ -76,9 +76,6 @@ export const setupDefaultRoutes = (app: Express) => {
 export const appSetupBeforeRoutesAndMiddleware = (app: Express) => {
   // setup middleware for the app
   setupDefaultMiddleware(app);
-
-  // setup routes for the app
-  setupDefaultRoutes(app);
 };
 
 /**
@@ -91,6 +88,9 @@ export const appSetupBeforeRoutesAndMiddleware = (app: Express) => {
  * 2. A global error handler middleware to handle errors throughout the application.
  */
 export const appSetupAfterRoutesAndMiddleware = (app: Express) => {
+  // setup routes for the app so that swagger will be generated at last
+  setupDefaultRoutes(app);
+
   // "Not Found" middleware
   app.use((_req: Request, _res: Response, _next: NextFunction) => {
     throw createNotFoundError('Route not found');
