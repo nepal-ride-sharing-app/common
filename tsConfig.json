@@ -1,14 +1,19 @@
-// filepath: /Users/Shared/CODING-SHARED/shared-library/tsconfig.json
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
-    "declaration": true,
-    "outDir": "./dist",
+    "target": "ES2021",
+    "module": "CommonJS",
     "strict": true,
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "baseUrl": "./src",
+    "typeRoots": ["./node_modules/@types", "./src/types/*"], // Specify default types
+    "types": [], // Include default types
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false // Ensure both JS and declaration files are generated
   },
   "include": ["src/**/*"]
 }

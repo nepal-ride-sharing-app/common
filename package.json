@@ -2,18 +2,24 @@
   "name": "ride-sharing-app-common",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "dev": "tsc --watch & nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
     "build": "tsc",
+    "compile": "npm run build",
+    "build:types": "tsc --emitDeclarationOnly",
+    "watch": "nodemon --watch src --exec 'npm run build'",
     "format": "prettier --write '**/*.{ts,js,json}'",
     "lint": "eslint '**/*.{ts,js}' --fix",
     "docs": "typedoc --out docs src"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^22.10.5",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.7",
     "@typescript-eslint/eslint-plugin": "^8.19.1",
     "@typescript-eslint/parser": "^8.19.1",
     "eslint": "^9.18.0",
@@ -25,9 +31,30 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "body-parser": "^1.20.3",
     "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-winston": "^4.2.0",
     "ioredis": "^5.4.2",
     "kafkajs": "^2.2.4",
-    "mysql2": "^3.12.0"
+    "mongodb": "^6.12.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.12.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^11.0.5",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "keywords": [
+    "mysql",
+    "common",
+    "utilities"
+  ],
+  "author": "Subash Niroula",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/subash1999/ride-sharing-app-common.git"
   }
 }
