@@ -32,6 +32,32 @@ jobs:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
+      - name: Check if version needs bump
+        id: version-check
+        run: |
+          current_version=$(npm pkg get version | tr -d '"')
+          echo "Current version: $current_version"
+          # Check if the version has already been bumped in a previous run
+          if [ -z "$(git tag -l $current_version)" ]; then
+            echo "Version does not exist. Proceeding with version bump."
+            echo "bump=true" >> $GITHUB_ENV
+          else
+            echo "Version already exists. Skipping bump."
+            echo "bump=false" >> $GITHUB_ENV
+          fi
+      - name: Bump Version
+        if: env.bump == 'true'
+        run: |
+          npm version patch -m "Bump version to %s"
+      - name: Commit Version Bump
+        if: env.bump == 'true'
+        run: |
+          version=$(npm pkg get version | tr -d '"')
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Bump version to $version"
+          git push
       - name: Publish Package
         run: |
           if [ "${{ github.ref_name }}" == "test" ]; then
