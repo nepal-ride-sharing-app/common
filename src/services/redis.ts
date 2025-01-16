@@ -1,6 +1,5 @@
-import Redis from 'ioredis';
+import Redis, { Redis as RedisClient } from 'ioredis';
 import logger from './logger'; // Assuming you have a logger utility
-import { RedisClient } from 'types';
 
 let redis: RedisClient | null = null;
 
