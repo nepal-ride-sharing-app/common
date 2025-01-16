@@ -57,7 +57,7 @@ jobs:
           version=${{ env.version }}
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          npm version $version
+          npm version $version --no-git-tag-version
           git push
       - name: Publish Package
         run: |
