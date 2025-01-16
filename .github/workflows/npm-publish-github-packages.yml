@@ -32,34 +32,37 @@ jobs:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
-      - name: Check if version needs bump
+      - name: Check if version exists and publish
         id: version-check
         run: |
           current_version=$(npm pkg get version | tr -d '"')
           echo "Current version: $current_version"
+          
           # Check if the version has already been bumped in a previous run
-          if [ -z "$(git tag -l $current_version)" ]; then
-            echo "Version does not exist. Proceeding with version bump."
-            echo "bump=true" >> $GITHUB_ENV
-          else
-            echo "Version already exists. Skipping bump."
-            echo "bump=false" >> $GITHUB_ENV
-          fi
-      - name: Bump Version
-        if: env.bump == 'true'
-        run: |
-          npm version patch -m "Bump version to %s"
+          tag_exists=$(git tag -l "$current_version")
+
+          # If the version already exists, bump it and check again
+          while [ -n "$tag_exists" ]; do
+            echo "Version $current_version already exists. Bumping version."
+            npm version patch -m "Bumped to version %s"
+            current_version=$(npm pkg get version | tr -d '"')
+            tag_exists=$(git tag -l "$current_version")
+          done
+
+          echo "Using version $current_version"
+          echo "version=$current_version" >> $GITHUB_ENV
       - name: Commit Version Bump
-        if: env.bump == 'true'
+        if: env.version != 'null'
         run: |
-          version=$(npm pkg get version | tr -d '"')
+          version=${{ env.version }}
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add .
-          git commit -m "Bump version to $version"
+          git commit -m "Bumped to version $version"
           git push
       - name: Publish Package
         run: |
+          echo "Publishing version ${{ env.version }}"
           if [ "${{ github.ref_name }}" == "test" ]; then
             npm publish --tag test
           elif [ "${{ github.ref_name }}" == "development" ]; then
