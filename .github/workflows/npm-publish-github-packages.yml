@@ -6,6 +6,7 @@ on:
       - main
       - test
       - development
+  workflow_dispatch:
 
 jobs:
   build:
