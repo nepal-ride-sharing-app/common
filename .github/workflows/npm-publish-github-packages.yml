@@ -41,17 +41,17 @@ jobs:
           
           # Initialize current_version and tag_exists
           tag_exists=$(git tag -l "$current_version")
+          echo "Tag Exists Version : $tag_exists"
           
           # If the version already exists, bump it and check again
           while [ -n "$tag_exists" ]; do
             echo "Version $current_version already exists. Bumping version."
-            npm version patch -m "Bumped to version %s"
+            npm version patch --no-git-tag-version
             current_version=$(npm pkg get version | tr -d '"')
             tag_exists=$(git tag -l "$current_version")
           done
-
-
-          echo "Using version $current_version"
+          
+          echo "Next available version is $current_version."
           echo "version=$current_version" >> $GITHUB_ENV
       - name: Check and Bump Version
         run: |
