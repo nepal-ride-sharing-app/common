@@ -39,9 +39,9 @@ jobs:
           current_version=$(npm pkg get version | tr -d '"')
           echo "Current version: $current_version"
           
-          # Check if the version has already been bumped in a previous run
+          # Initialize current_version and tag_exists
           tag_exists=$(git tag -l "$current_version")
-
+          
           # If the version already exists, bump it and check again
           while [ -n "$tag_exists" ]; do
             echo "Version $current_version already exists. Bumping version."
@@ -49,6 +49,7 @@ jobs:
             current_version=$(npm pkg get version | tr -d '"')
             tag_exists=$(git tag -l "$current_version")
           done
+
 
           echo "Using version $current_version"
           echo "version=$current_version" >> $GITHUB_ENV
