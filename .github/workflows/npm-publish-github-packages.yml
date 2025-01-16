@@ -1,11 +1,11 @@
 name: Node.js Package
 
 on:
-  push:
-    branches:
-      - main
-      - test
-      - development
+  # push:
+  #   branches:
+  #     - main
+  #     - test
+  #     - development
   workflow_dispatch:
 
 jobs:
