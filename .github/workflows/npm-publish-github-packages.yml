@@ -1,6 +1,3 @@
-# This workflow will run tests using node and publish a package with specific tags
-# when changes are pushed to the test, development, or main branch.
-
 name: Node.js Package
 
 on:
@@ -8,7 +5,7 @@ on:
     branches:
       - main
       - test
-      - development # Include the development branch for specific workflows
+      - development
 
 jobs:
   build:
@@ -37,11 +34,12 @@ jobs:
       - run: npm ci
       - name: Publish Package
         run: |
-          if [ "${{ github.ref_name }}" == "test" ]; then
+          if [ "${GITHUB_REF##*/}" == "test" ]; then
             npm publish --tag test
-          elif [ "${{ github.ref_name }}" == "development" ]; then
+          elif [ "${GITHUB_REF##*/}" == "development" ]; then
             npm publish --tag development
           else
             npm publish
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
