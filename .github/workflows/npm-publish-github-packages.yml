@@ -34,9 +34,9 @@ jobs:
       - run: npm ci
       - name: Publish Package
         run: |
-          if [ "${GITHUB_REF##*/}" == "test" ]; then
+          if [ "${{ github.ref_name }}" == "test" ]; then
             npm publish --tag test
-          elif [ "${GITHUB_REF##*/}" == "development" ]; then
+          elif [ "${{ github.ref_name }}" == "development" ]; then
             npm publish --tag development
           else
             npm publish
