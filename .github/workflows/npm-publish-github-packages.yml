@@ -51,14 +51,21 @@ jobs:
 
           echo "Using version $current_version"
           echo "version=$current_version" >> $GITHUB_ENV
-      - name: Commit Version Bump
-        if: env.version != 'null'
+      - name: Check and Bump Version
         run: |
-          version=${{ env.version }}
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          npm version $version --no-git-tag-version
-          git push
+          current_version=$(npm pkg get version | tr -d '"')
+          echo "Current version: $current_version"
+      
+          # Check if the version needs to be bumped
+          if [ "$current_version" != "${{ env.version }}" ]; then
+            echo "Version $current_version does not match. Bumping to version ${{ env.version }}."
+            git config user.name "GitHub Actions"
+            git config user.email "actions@github.com"
+            npm version ${{ env.version }} --no-git-tag-version
+            git push
+          else
+            echo "Version is already at $current_version. No bump needed."
+          fi
       - name: Publish Package
         run: |
           echo "Publishing version ${{ env.version }}"
