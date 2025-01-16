@@ -57,8 +57,7 @@ jobs:
           version=${{ env.version }}
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add .
-          git commit -m "Bumped to version $version"
+          npm version $version
           git push
       - name: Publish Package
         run: |
