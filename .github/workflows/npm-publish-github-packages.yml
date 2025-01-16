@@ -61,7 +61,7 @@ jobs:
             echo "Version $current_version does not match. Bumping to version ${{ env.version }}."
             git config user.name "GitHub Actions"
             git config user.email "actions@github.com"
-            npm version ${{ env.version }} --no-git-tag-version
+            npm version ${{ env.version }}
             git push
           else
             echo "Version is already at $current_version. No bump needed."
