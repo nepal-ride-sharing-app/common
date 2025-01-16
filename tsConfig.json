@@ -9,11 +9,11 @@
     "moduleResolution": "node",
     "outDir": "dist",
     "baseUrl": "./src",
-    "typeRoots": ["./node_modules/@types", "./src/types/*"], // Specify default types
-    "types": [], // Include default types
+    "typeRoots": ["./node_modules/@types", "./src/types/*"],
+    "types": [],
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": false // Ensure both JS and declaration files are generated
+    "emitDeclarationOnly": false
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
