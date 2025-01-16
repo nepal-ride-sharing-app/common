@@ -55,16 +55,19 @@ jobs:
         run: |
           current_version=$(npm pkg get version | tr -d '"')
           echo "Current version: $current_version"
+          
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
       
           # Check if the version needs to be bumped
           if [ "$current_version" != "${{ env.version }}" ]; then
             echo "Version $current_version does not match. Bumping to version ${{ env.version }}."
-            git config user.name "GitHub Actions"
-            git config user.email "actions@github.com"
             npm version ${{ env.version }}
             git push
           else
             echo "Version is already at $current_version. No bump needed."
+            git tag "$current_version"
+            git push origin "$current_version"
           fi
       - name: Publish Package
         run: |
