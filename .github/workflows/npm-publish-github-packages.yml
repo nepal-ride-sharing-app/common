@@ -1,5 +1,5 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+# This workflow will run tests using node and publish a package with specific tags
+# when changes are pushed to the test, development, or main branch.
 
 name: Node.js Package
 
@@ -7,6 +7,8 @@ on:
   push:
     branches:
       - main
+      - test
+      - development # Include the development branch for specific workflows
 
 jobs:
   build:
@@ -33,6 +35,13 @@ jobs:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
-      - run: npm publish
+      - name: Publish Package
+        run: |
+          if [ "${{ github.ref_name }}" == "test" ]; then
+            npm publish --tag test
+          elif [ "${{ github.ref_name }}" == "development" ]; then
+            npm publish --tag development
+          else
+            npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
