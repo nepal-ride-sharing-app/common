@@ -74,6 +74,8 @@ jobs:
           fi
       - name: Build the package
         run: npm run build
+      - name: Moving the dist/* to .
+        run: mv dist/* .
       - name: Publish Package
         run: |
           echo "Publishing version ${{ env.version }}"
