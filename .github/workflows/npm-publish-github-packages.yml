@@ -33,7 +33,6 @@ jobs:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
-      - run: npm run build
       - name: Check if version exists and publish
         id: version-check
         run: |
@@ -73,6 +72,8 @@ jobs:
             git tag "$current_version"
             git push origin "$current_version"
           fi
+      - name: Build the package
+        run: npm run build
       - name: Publish Package
         run: |
           echo "Publishing version ${{ env.version }}"
