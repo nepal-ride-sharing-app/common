@@ -1,5 +1,5 @@
 {
-  "name": "@subash1999/ride-sharing-app-common",
+  "name": "@nepal-ride-sharing-app/ride-sharing-app-common",
   "version": "1.0.5",
   "description": "",
   "main": "dist/index.js",
