@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon --config nodemon.json",
     "dev-compile-and-create-local-libs": "ts-node --transpile-only ./src/index.ts && npm run create-local-libs",
-    "build": "tsc && npm run copy-package-json",
+    "build": "tsc && npm run copy-package-json && npm run create-local-libs",
     "start": "node dist/index.js",
     "compile": "npm run build",
     "build:types": "tsc --emitDeclarationOnly",
