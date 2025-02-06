@@ -76,6 +76,10 @@ jobs:
         run: npm run build
       - name: Moving the dist/* to .
         run: mv dist/* .
+      - name: change main and types in package.json
+        run: |
+          jq '.main = "index.js" | .types = "index.d.ts"' package.json > temp.json
+          mv temp.json package.json
       - name: Publish Package
         run: |
           echo "Publishing version ${{ env.version }}"

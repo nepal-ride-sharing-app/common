@@ -37,6 +37,7 @@ const router = Router();
  *         description: Error executing query
  */
 router.get('/query', async (req: Request, res: Response): Promise<any> => {
+  return res.status(200).send('Hello from dbRoutes');
   const { sqlQuery } = req.query;
   if (!sqlQuery) {
     return res.status(400).send('sqlQuery parameter is required');
