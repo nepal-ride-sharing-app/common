@@ -19,7 +19,8 @@ export type ServiceUrls = {
 export type PublicConfig = ServicePortsConfig &
   ServiceUrls & {
     targetEnv: TargetEnvironment;
-    serviceVersion: string;
+    appName: string;
+    appShortName: string;
   };
 
 export type AWSConfig = {
@@ -75,3 +76,7 @@ export type PrivateConfig = AWSConfig &
   LocalstackConfig;
 
 export type CommonEnvironmentConfig = PublicConfig & PrivateConfig;
+
+export type ServiceEnvironmentConfig = CommonEnvironmentConfig;
+
+export type MobileAppEnvironmentConfig = PublicConfig;
