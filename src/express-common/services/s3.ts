@@ -1,6 +1,6 @@
 import AWS from 'aws-sdk';
 import logger from './logger';
-import { isDevelopmentMode } from '../utils/helpers';
+import { isDevelopmentMode } from '../../shared-common/utils/helpers';
 
 const s3 = new AWS.S3({
   region: process.env.AWS_REGION,

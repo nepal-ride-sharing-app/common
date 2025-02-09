@@ -1,5 +1,5 @@
 {
-  "name": "@nepal-ride-sharing-app/common",
+  "name": "@nrsa/common",
   "version": "1.0.5",
   "description": "",
   "main": "dist/index.js",

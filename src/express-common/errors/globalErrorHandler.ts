@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import { ERROR_NAMES } from '../constants/errorConstants';
+import { ERROR_NAMES } from '../../shared-common/constants/errorConstants';
 import log from '../services/logger';
-import { ErrorResponse } from '../types/ErrorResponse';
-import { isProductionMode } from '../utils/helpers';
+import { ErrorResponse } from '../../shared-common/types/ErrorResponse';
 import {
   createAuthError,
   createBadRequestError,

@@ -7,12 +7,12 @@ import {
   ErrorResponse,
   ValidationErrorResponse,
   ValidationErrorType,
-} from 'types/ErrorResponse';
+} from 'shared-common/types/ErrorResponse';
 import {
   ERROR_STATUS_CODES,
   ERROR_CODES,
   ERROR_NAMES,
-} from '../constants/errorConstants';
+} from '../../shared-common/constants/errorConstants';
 
 export const createNotFoundError = (message: string): ErrorResponse => ({
   status: ERROR_STATUS_CODES.NOT_FOUND,

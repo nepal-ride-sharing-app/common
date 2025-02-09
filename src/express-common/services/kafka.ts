@@ -8,7 +8,7 @@ import {
   KafkaConfig,
 } from 'kafkajs';
 import fs from 'fs';
-import { isDevelopmentMode, isProductionMode } from '../utils/helpers';
+import { isDevelopmentMode, isProductionMode } from '../../shared-common/utils/helpers';
 
 export const isKafkaSSL = () => process.env.KAFKA_SSL === 'true';
 

@@ -10,7 +10,7 @@ import kafkaRoutes from '../routes/kafkaRoutes';
 import dbRoutes from '../routes/dbRoutes';
 import redisRoutes from '../routes/redisRoutes';
 import mongoRoutes from '../routes/mongoRoutes';
-import { isProductionMode } from './helpers';
+import { isProductionMode } from '../../shared-common/utils/helpers';
 import globalErrorHandler from '../errors/globalErrorHandler';
 import { createNotFoundError } from '../errors/customErrors';
 

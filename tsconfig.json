@@ -9,7 +9,7 @@
     "moduleResolution": "node",
     "outDir": "dist",
     "baseUrl": "./src",
-    "typeRoots": ["./node_modules/@types", "./src/types/*"],
+    "typeRoots": ["./node_modules/@types", "src/shared-common/types/*"],
     "types": [],
     "declaration": true,
     "declarationMap": true,
